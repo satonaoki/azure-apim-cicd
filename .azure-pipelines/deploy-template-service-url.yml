@@ -10,9 +10,9 @@ steps:
     inputs:
       action: Create Or Update Resource Group
       deploymentMode: Incremental
-      azureResourceManagerConnection: $(AZURE_RM_SVC_CONNECTION)
+      azureResourceManagerConnection: $(AZURE_SERVICE_CONNECTION)
       location: $(LOCATION)
-      resourceGroupName: $(RG)
+      resourceGroupName: $(RESOURCE_GROUP)
       templateLocation: Linked artifact
       csmFile: $(Build.SourcesDirectory)/api-management/${{parameters.templateFile}}
-      overrideParameters: -ApimServiceName $(APIM)
+      overrideParameters: -ApimServiceName $(APIM) -serviceUrl {"platformapi":"$(BACKEND_URL)","platformapiorder":"$(BACKEND_URL)"}

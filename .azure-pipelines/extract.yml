@@ -1,0 +1,54 @@
+trigger:
+  - none
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  - template: variables-dev.yml
+
+steps:
+  - checkout: self
+    persistCredentials: true
+
+  - pwsh: |
+      git config --global user.email "you@example.com"
+      git config --global user.name "$(Build.DefinitionName)"
+      git switch -c $(Build.DefinitionName)/$(Build.BuildId)
+    workingDirectory: $(Build.SourcesDirectory)/APIManagement
+    displayName: Prepare Git
+
+  - task: AzureCLI@2
+    displayName: Extract ARM templates
+    inputs:
+      azureSubscription: $(AZURE_SERVICE_CONNECTION)
+      scriptType: pscore
+      scriptLocation: inlineScript
+      workingDirectory: $(Build.SourcesDirectory)/APIManagement
+      inlineScript: >
+        ./reskit0.7/apimtemplate extract 
+        --extractorConfig ./config/extractSettings.json 
+        --resourceGroup $(RESOURCE_GROUP) 
+        --sourceApimName $(API_MANAGEMENT) 
+
+  - pwsh: |
+      git add --all 
+      git commit -m "Pipeline: $(Build.DefinitionName) BuildId: $(Build.BuildId) - APIM templates updated"
+      git push origin $(Build.DefinitionName)/$(Build.BuildId)
+    workingDirectory: $(Build.SourcesDirectory)/APIManagement
+    displayName: Push ARM templates
+
+  # - task: AzureCLI@2
+  #   displayName: Create PR
+  #   env:
+  #     AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+  #   inputs:
+  #     azureSubscription: $(AZURE_SERVICE_CONNECTION)
+  #     workingDirectory: $(Build.SourcesDirectory)/APIManagement
+  #     scriptType: pscore
+  #     scriptLocation: inlineScript
+  #     inlineScript: |
+  #       az repos pr create --org "https://dev.azure.com/xxxxx/" --project "Melsoft365Platform" --repository "APIManagement" --source-branch $(Build.DefinitionName)/$(Build.BuildId) --title "APIM ARM templates updated" --description "Created from Pipeline: $(Build.DefinitionName) BuildId: $(Build.BuildId)" --auto-complete true --delete-source-branch true --squash true
+
+  - checkout: self
+    clean: true

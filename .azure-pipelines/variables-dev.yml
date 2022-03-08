@@ -1,5 +1,5 @@
-- name: APIM
-  value:
+- name: API_MANAGEMENT
+  value: apimcicd-dev
 
 - name: BACKEND_URL
-  value: 
+  value: https://apimcicd-dev.azurewebsites.net
