@@ -7,3 +7,6 @@ variables:
 
   - name: LOCATION
     value: japaneast
+
+  - name: GIT_REPO
+    value: azure-apim-cicd
