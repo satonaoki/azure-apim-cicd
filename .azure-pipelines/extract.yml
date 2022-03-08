@@ -26,7 +26,7 @@ steps:
       scriptLocation: inlineScript
       workingDirectory: $(Build.SourcesDirectory)/APIManagement
       inlineScript: >
-        ./reskit0.7/apimtemplate extract 
+        ./reskit/apimtemplate extract 
         --extractorConfig ./config/extractSettings.json 
         --resourceGroup $(RESOURCE_GROUP) 
         --sourceApimName $(API_MANAGEMENT) 
