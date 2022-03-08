@@ -1,5 +1,8 @@
-- name: API_MANAGEMENT
-  value: apimcicd-prod
+variables:
+  - template: variables-common.yml
 
-- name: BACKEND_URL
-  value: https://apimcicd-prod.azurewebsites.net
+  - name: API_MANAGEMENT
+    value: apimcicd-prod
+
+  - name: BACKEND_URL
+    value: https://apimcicd-prod.azurewebsites.net

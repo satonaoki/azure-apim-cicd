@@ -1,9 +1,9 @@
-- name: AZURE_SERVICE_CONNECTION
-  value: apimcicd
+variables:
+  - name: AZURE_SERVICE_CONNECTION
+    value: apimcicd
 
-- name: RESOURCE_GROUP
-  value: apimcicd
+  - name: RESOURCE_GROUP
+    value: apimcicd
 
-- name: LOCATION
-  value: japaneast
-
+  - name: LOCATION
+    value: japaneast
