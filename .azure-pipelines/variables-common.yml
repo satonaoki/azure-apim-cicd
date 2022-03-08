@@ -1,8 +1,9 @@
-- name: AZURE_RM_SVC_CONNECTION
-  value: 
+- name: AZURE_SERVICE_CONNECTION
+  value: apimcicd
+
+- name: RESOURCE_GROUP
+  value: apimcicd
 
 - name: LOCATION
-  value: 
+  value: japaneast
 
-- name: RG
-  value: 
