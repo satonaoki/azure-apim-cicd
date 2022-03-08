@@ -29,7 +29,7 @@ steps:
         ./reskit/apimtemplate extract 
         --extractorConfig ./config/extractSettings.json 
         --resourceGroup $(RESOURCE_GROUP) 
-        --sourceApimName $(API_MANAGEMENT) 
+        --sourceApimName $(API_MANAGEMENT)
 
   - pwsh: |
       git add --all 
