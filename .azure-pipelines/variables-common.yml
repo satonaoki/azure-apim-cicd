@@ -1,0 +1,8 @@
+- name: AZURE_RM_SVC_CONNECTION
+  value: 
+
+- name: LOCATION
+  value: 
+
+- name: RG
+  value: 

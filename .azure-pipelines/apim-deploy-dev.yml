@@ -1,0 +1,12 @@
+trigger:
+  - none
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  - group: apimcicd-variable-group
+  - template: variables.yml
+
+stages:
+  - template: apim-deployment-template-all.yml
