@@ -8,4 +8,4 @@ variables:
   - template: variables-prod.yml
 
 stages:
-  - template: deployment-template-all.yml
+  - template: deploy-template-all.yml
