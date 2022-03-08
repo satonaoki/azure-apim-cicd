@@ -15,4 +15,4 @@ steps:
       resourceGroupName: $(RESOURCE_GROUP)
       templateLocation: Linked artifact
       csmFile: $(Build.SourcesDirectory)/api-management/${{parameters.templateFile}}
-      overrideParameters: -ApimServiceName $(API_MANAGEMENT) -serviceUrl {$(APIM_API_NAME):"$(BACKEND_URL)"}
+      overrideParameters: -ApimServiceName $(API_MANAGEMENT) -serviceUrl {"$(APIM_API_NAME)"":"$(BACKEND_URL)"}
