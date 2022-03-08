@@ -10,3 +10,6 @@ variables:
 
   - name: GIT_REPO
     value: azure-apim-cicd
+
+  - name: APIM_API_NAME
+    value: weatherforecast
