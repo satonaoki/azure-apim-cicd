@@ -1,0 +1,6 @@
+{
+    "destinationApimName": "destinationApim",
+    "fileFolder": "api-management",
+    "baseFileName": "",
+    "paramServiceUrl": "true"
+}

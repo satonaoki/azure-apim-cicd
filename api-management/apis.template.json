@@ -1,0 +1,131 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ApimServiceName": {
+      "type": "string"
+    },
+    "serviceUrl": {
+      "type": "object"
+    }
+  },
+  "resources": [
+    {
+      "properties": {
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "WeatherForecast",
+        "serviceUrl": "[parameters('serviceUrl').weatherforecast]",
+        "path": "",
+        "protocols": [
+          "https"
+        ]
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/weatherforecast')]",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": []
+    },
+    {
+      "properties": {
+        "contentType": "application/vnd.oai.openapi.components+json",
+        "document": {
+          "components": {
+            "schemas": {
+              "WeatherForecast": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "temperatureC": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "summary": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "temperatureF": {
+                    "type": "integer",
+                    "format": "int32",
+                    "readOnly": true
+                  }
+                },
+                "additionalProperties": false
+              },
+              "WeatherforecastGet200ApplicationJsonResponse": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/WeatherForecast"
+                },
+                "x-apim-inline": true
+              }
+            }
+          }
+        }
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/weatherforecast/6227d2286dc9ca0da43ea49d')]",
+      "type": "Microsoft.ApiManagement/service/apis/schemas",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'weatherforecast')]"
+      ]
+    },
+    {
+      "properties": {
+        "templateParameters": [],
+        "request": {
+          "queryParameters": [],
+          "headers": [],
+          "representations": []
+        },
+        "responses": [
+          {
+            "statusCode": 200,
+            "description": "Success",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "sample": "[[\r\n  {\r\n    \"date\": \"string\",\r\n    \"temperatureC\": 0,\r\n    \"summary\": \"string\",\r\n    \"temperatureF\": 0\r\n  }\r\n]",
+                "schemaId": "6227d2286dc9ca0da43ea49d",
+                "typeName": "WeatherforecastGet200ApplicationJsonResponse"
+              }
+            ]
+          }
+        ],
+        "displayName": "GetWeatherForecast",
+        "method": "GET",
+        "urlTemplate": "/weatherforecast"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/weatherforecast/GetWeatherForecast')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'weatherforecast')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('ApimServiceName'), 'weatherforecast', '6227d2286dc9ca0da43ea49d')]"
+      ]
+    },
+    {
+      "properties": {
+        "displayName": "WeatherForecast"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/weatherforecast/GetWeatherForecast/WeatherForecast')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'weatherforecast', 'GetWeatherForecast')]"
+      ]
+    }
+  ]
+}

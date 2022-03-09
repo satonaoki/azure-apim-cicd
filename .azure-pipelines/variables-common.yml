@@ -1,0 +1,15 @@
+variables:
+  - name: AZURE_SERVICE_CONNECTION
+    value: apimcicd
+
+  - name: RESOURCE_GROUP
+    value: apimcicd
+
+  - name: LOCATION
+    value: japaneast
+
+  - name: GIT_REPO
+    value: azure-apim-cicd
+
+  - name: APIM_API_NAME
+    value: weatherforecast

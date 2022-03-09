@@ -1,0 +1,26 @@
+stages:
+  - stage: ApimArmTemplateDeploy
+    displayName: Deploy APIM
+    jobs:
+      - job: DeployApimConfig
+        displayName: Deploy APIM
+        steps:
+          - template: deploy-template.yml
+            parameters:
+              templateFile: globalServicePolicy.template.json
+              displayName: Deploy Global Service Policy
+
+          - template: deploy-template.yml
+            parameters:
+              templateFile: tags.template.json
+              displayName: Deploy Tag
+
+          - template: deploy-template-service-url.yml
+            parameters:
+              templateFile: apis.template.json
+              displayName: Deploy API
+
+          - template: deploy-template.yml
+            parameters:
+              templateFile: apiTags.template.json
+              displayName: Deploy API/Tag

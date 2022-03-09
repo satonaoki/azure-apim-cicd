@@ -1,0 +1,11 @@
+trigger: none
+pr: none
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  - template: variables-prod.yml
+
+stages:
+  - template: deploy-template-all.yml

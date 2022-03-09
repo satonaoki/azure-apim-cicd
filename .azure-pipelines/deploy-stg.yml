@@ -1,0 +1,12 @@
+trigger: none
+pr: none
+
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  - template: variables-stg.yml
+
+stages:
+  - template: deploy-template-all.yml

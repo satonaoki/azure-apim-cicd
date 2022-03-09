@@ -1,0 +1,18 @@
+parameters:
+  - name: templateFile
+    type: string
+  - name: displayName
+    type: string
+
+steps:
+  - task: AzureResourceManagerTemplateDeployment@3
+    displayName: ${{parameters.displayName}}
+    inputs:
+      action: Create Or Update Resource Group
+      deploymentMode: Incremental
+      azureResourceManagerConnection: $(AZURE_SERVICE_CONNECTION)
+      location: $(LOCATION)
+      resourceGroupName: $(RESOURCE_GROUP)
+      templateLocation: Linked artifact
+      csmFile: $(Build.SourcesDirectory)/api-management/${{parameters.templateFile}}
+      overrideParameters: -ApimServiceName $(API_MANAGEMENT) -serviceUrl {"$(APIM_API_NAME)":"$(BACKEND_URL)"}
