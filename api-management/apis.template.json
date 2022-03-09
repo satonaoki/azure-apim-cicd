@@ -12,6 +12,7 @@
   "resources": [
     {
       "properties": {
+        "description": ".....",
         "authenticationSettings": {
           "subscriptionKeyRequired": false
         },
