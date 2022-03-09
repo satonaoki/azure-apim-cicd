@@ -7,7 +7,7 @@
     },
     "serviceUrl": {
       "value": {
-        "weatherforecast": null
+        "weatherforecast": "https://apimcicd-dev.azurewebsites.net"
       }
     }
   },
